@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private float rotateSpeed = 10f;
     [SerializeField] private float playerRadius = 0.7f;
     [SerializeField] private float playerHeight = 2f;
-    [SerializeField] private float interactDistance = 2f;
+    [SerializeField] private float interactDistance = 10f;
 
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask countersLayerMask;
@@ -56,6 +56,7 @@ public class Player : MonoBehaviour {
             lastInteractDir = moveDir;
         }
 
+        
         if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask)) {
             if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)){
                 // Has ClearCounter
@@ -68,8 +69,6 @@ public class Player : MonoBehaviour {
         } else {
             SetSelectedCounter(null);
         }
-
-        Debug.Log(selectedCounter);
     }
 
     private void HandleMovement() { 
