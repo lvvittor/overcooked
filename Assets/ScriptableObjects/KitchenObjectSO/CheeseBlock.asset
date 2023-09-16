@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585d492bbc0e26b8987d0517631162c2, type: 3}
   m_Name: CheeseBlock
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  sprite: {fileID: 0}
-  objectName: 
+  prefab: {fileID: 2373826181267490263, guid: 266ce9ea57e0ea1b093160da90ebc369, type: 3}
+  sprite: {fileID: 21300000, guid: da2d04fe27b94e34ea0b624569b48a6f, type: 3}
+  objectName: CheeseBlock
