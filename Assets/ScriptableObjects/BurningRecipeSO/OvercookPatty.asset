@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 585d492bbc0e26b8987d0517631162c2, type: 3}
-  m_Name: Bread
+  m_Script: {fileID: 11500000, guid: 4d28258a99893ac4f896797fccd9275c, type: 3}
+  m_Name: OvercookPatty
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2373826181267490263, guid: fc309d090cbd16f45a7271b57c1177c0, type: 3}
-  sprite: {fileID: 21300000, guid: 77b28124b8bda494381c80bd5aa42c22, type: 3}
-  objectName: Bread
+  input: {fileID: 11400000, guid: 6e661587617ed9f458d1c297c7bea2a9, type: 2}
+  output: {fileID: 11400000, guid: 16f7ec5291cabf14b84797100fb93446, type: 2}
+  burningTimerMax: 5

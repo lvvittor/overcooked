@@ -83,12 +83,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         CheckForCounter();
     }
 
-    private void OnDrawGizmos() {
-        Vector3 startPos = transform.position + Vector3.up * 0.1f;
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(startPos, 0.75f); // Draw a small sphere at the starting position.
-    }
-
     private void CheckForObjectsOnFloor() {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
