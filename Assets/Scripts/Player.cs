@@ -14,7 +14,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         public BaseCounter selectedCounter;
     }
 
-    [SerializeField] private float moveSpeed = 3.5f;
+    [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float rotateSpeed = 10f;
     [SerializeField] private float playerRadius = 0.7f;
     [SerializeField] private float playerHeight = 2f;
@@ -134,6 +134,10 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
     public void HandleMovement() { 
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        if (inputVector == Vector2.zero) {
+            isWalking = false;
+            return;
+        }
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
         float moveDistance = moveSpeed * Time.deltaTime;
@@ -167,11 +171,11 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
         if (canMove){
             EventQueueManager.Instance.AddCommand(new CmdMovement(transform, moveDir, moveSpeed));
-            transform.position += moveDir * moveDistance;
         } 
         
         isWalking = moveDir != Vector3.zero;
 
+        float rotateDistance = rotateSpeed * Time.deltaTime;
         EventQueueManager.Instance.AddCommand(new CmdSlerp(transform, moveDir, rotateSpeed));
     }
 

@@ -22,7 +22,7 @@ public class KitchenGameManager : MonoBehaviour {
     private float waitingToStartTimer = 1f;
     private float countdownToStartTimer = 3f;
     private float gamePlayingTimer;
-    private float gamePlayingTimerMax = 10f;
+    private float gamePlayingTimerMax = 60f;
     private bool isPaused = false;
 
     private void Awake(){
@@ -61,7 +61,6 @@ public class KitchenGameManager : MonoBehaviour {
             case State.GameOver:
                 break;
         }
-        Debug.Log(state);
     }
 
     private void GameInput_OnPauseAction(object sender, EventArgs e) {

@@ -15,7 +15,7 @@ public class CmdSlerp : ICommand {
     }
 
     public void Do() {
-        _transform.position = Vector3.Slerp(_transform.forward, _direction, _speed * Time.deltaTime);
+        _transform.forward = Vector3.Slerp(_transform.forward, _direction, _speed * Time.deltaTime);
     }
 
 }
