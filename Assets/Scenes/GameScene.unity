@@ -1417,7 +1417,6 @@ GameObject:
   - component: {fileID: 660759512}
   - component: {fileID: 660759514}
   - component: {fileID: 660759515}
-  - component: {fileID: 660759516}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1454,7 +1453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae800b93bc3cbc2599745397d0459be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
+  moveSpeed: 3.5
   rotateSpeed: 10
   playerRadius: 0.7
   playerHeight: 2
@@ -1518,18 +1517,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &660759516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 660759510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccb2f4db7dc545e488caf895a09bb9e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &671547821
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1934,6 +1921,7 @@ GameObject:
   m_Component:
   - component: {fileID: 755788911}
   - component: {fileID: 755788910}
+  - component: {fileID: 755788912}
   m_Layer: 0
   m_Name: KitchenGameManager
   m_TagString: Untagged
@@ -1968,6 +1956,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &755788912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755788909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a1307d84dc6b841ad88150ccb0357e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &822089701
 GameObject:
   m_ObjectHideFlags: 0

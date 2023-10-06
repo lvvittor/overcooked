@@ -14,7 +14,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         public BaseCounter selectedCounter;
     }
 
-    [SerializeField] private float moveSpeed = 7f;
+    [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float rotateSpeed = 10f;
     [SerializeField] private float playerRadius = 0.7f;
     [SerializeField] private float playerHeight = 2f;
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         HandleInteractions();
     }
 
-    private void HandleInteractions() {
+    public void HandleInteractions() {
         CheckForObjectsOnFloor();
         CheckForCounter();
     }
@@ -132,10 +132,9 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         }
     }
 
-    private void HandleMovement() { 
+    public void HandleMovement() { 
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
-
 
         float moveDistance = moveSpeed * Time.deltaTime;
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance, countersLayerMask);
@@ -167,13 +166,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         }
 
         if (canMove){
+            EventQueueManager.Instance.AddCommand(new CmdMovement(transform, moveDir, moveSpeed));
             transform.position += moveDir * moveDistance;
         } 
         
         isWalking = moveDir != Vector3.zero;
 
-        float rotateDistance = rotateSpeed * Time.deltaTime;
-        transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateDistance);
+        EventQueueManager.Instance.AddCommand(new CmdSlerp(transform, moveDir, rotateSpeed));
     }
 
     public bool IsWalking() {
