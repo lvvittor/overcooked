@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 381607101834092098}
   - component: {fileID: 8404407187761508083}
-  - component: {fileID: 4248653402022860481}
+  - component: {fileID: 8254970112942118602}
   m_Layer: 0
   m_Name: Sound
   m_TagString: Untagged
@@ -129,7 +129,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4248653402022860481
+--- !u!114 &8254970112942118602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9034333259031218963}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d81bbfd456fead47a41e2e7201a71f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 63d19bae21b434001b7ba4bd7cdde993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stoveCounter: {fileID: 1386811931992665896}
