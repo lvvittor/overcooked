@@ -5090,14 +5090,14 @@ MonoBehaviour:
   pauseButton: {fileID: 634749842}
   soundEffectsText: {fileID: 1577962647}
   musicText: {fileID: 256947036}
-  moveUpText: {fileID: 70109265}
-  moveDownText: {fileID: 2098487745}
-  moveLeftText: {fileID: 217615094}
-  moveRightText: {fileID: 966401433}
-  interactText: {fileID: 1936807462}
-  interactAlternateText: {fileID: 1449455397}
-  pauseText: {fileID: 1856733081}
-  pressToRebindKeyTransform: {fileID: 0}
+  moveUpText: {fileID: 662584595}
+  moveDownText: {fileID: 333738242}
+  moveLeftText: {fileID: 1993272479}
+  moveRightText: {fileID: 243692866}
+  interactText: {fileID: 1820812178}
+  interactAlternateText: {fileID: 2073167630}
+  pauseText: {fileID: 1840389114}
+  pressToRebindKeyTransform: {fileID: 174884251}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
