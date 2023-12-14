@@ -1,16 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DeliveryManagerSingleUI : MonoBehaviour {
+public class DeliveryManagerSingleUI : MonoBehaviour, IHasProgress {
     [SerializeField] private TextMeshProUGUI recipeNameText;
     [SerializeField] private Transform iconContainer;
     [SerializeField] private Transform iconTemplate;
 
+    private float maxRecipeTime = 25f;
+    private float recipeTimer;
+
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+
     private void Awake() {
         iconTemplate.gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        recipeTimer -= Time.deltaTime;
+        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+            progressNormalized = (recipeTimer / maxRecipeTime),
+        });
     }
 
     public void SetRecipeSO(RecipeSO recipeSO) {
@@ -26,6 +40,11 @@ public class DeliveryManagerSingleUI : MonoBehaviour {
             iconTransform.gameObject.SetActive(true);
             iconTransform.GetComponent<Image>().sprite = ingredient.sprite;
         });
+    }
+
+    public void SetTimer(float timer)
+    {
+        recipeTimer = timer;
     }
 
 

@@ -5,8 +5,14 @@ using UnityEngine;
 
 public class DeliveryManager : MonoBehaviour {
 
-    public event EventHandler OnRecipeSpawned;
-    public event EventHandler OnRecipeDelivered;
+    public class RecipeEventArgs : EventArgs
+    {
+        public List<float> Timers { get; set; }
+    }
+
+    public event EventHandler<RecipeEventArgs> OnRecipeSpawned;
+    public event EventHandler<RecipeEventArgs> OnRecipeDelivered;
+    public event EventHandler<RecipeEventArgs> OnRecipeTimeout;
     public event EventHandler OnRecipeSuccess;
     public event EventHandler OnRecipeFailure;
 
@@ -14,9 +20,11 @@ public class DeliveryManager : MonoBehaviour {
     [SerializeField] private RecipeListSO recipeList;
 
     private List<RecipeSO> waitingRecipes;
+    private List<float> waitingRecipesTimers;
 
     private float spawnRecipeTimer;
     private float spawnRecipeTimerMax = 10f;
+    private float recipeTimerMax = 25f;
 
     private int waitingRecipeMax = 4;
 
@@ -25,6 +33,7 @@ public class DeliveryManager : MonoBehaviour {
     private void Awake() {
         Instance = this;
         waitingRecipes = new List<RecipeSO>();
+        waitingRecipesTimers = new List<float>();
     }
 
     private void Update() {
@@ -36,10 +45,22 @@ public class DeliveryManager : MonoBehaviour {
                 RecipeSO waitingRecipe = recipeList.recipeSOList[UnityEngine.Random.Range(0, recipeList.recipeSOList.Count)];
                 Debug.Log(waitingRecipe.recipeName);
                 waitingRecipes.Add(waitingRecipe);
+                waitingRecipesTimers.Add(recipeTimerMax);
 
-                OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
+                OnRecipeSpawned?.Invoke(this, new RecipeEventArgs { Timers = waitingRecipesTimers });
             }   
         }
+
+        for (int i = 0; i < waitingRecipesTimers.Count; i++) {
+            waitingRecipesTimers[i] -= Time.deltaTime;
+            if (waitingRecipesTimers[i] <= 0f)
+            {
+                waitingRecipes.RemoveAt(i);
+                waitingRecipesTimers.RemoveAt(i);
+                OnRecipeTimeout?.Invoke(this, new RecipeEventArgs { Timers = waitingRecipesTimers });
+            }
+        }
+
     }
 
     public void DeliverRecipe(PlateKitchenObject plateKitchenObject) {
@@ -63,8 +84,8 @@ public class DeliveryManager : MonoBehaviour {
                 if (plateContentsMatchRecipe) {
                     successfulRecipesDelivered++;
                     waitingRecipes.RemoveAt(i);
-                    Debug.Log("Recipe delivered!");
-                    OnRecipeDelivered?.Invoke(this, EventArgs.Empty);
+                    waitingRecipesTimers.RemoveAt(i);
+                    OnRecipeDelivered?.Invoke(this, new RecipeEventArgs { Timers = waitingRecipesTimers });
                     OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
                     return;
                 }
