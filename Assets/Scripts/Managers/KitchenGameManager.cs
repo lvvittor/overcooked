@@ -11,6 +11,8 @@ public class KitchenGameManager : MonoBehaviour {
     public event EventHandler OnGamePaused;
     public event EventHandler OnGameResumed;
 
+    private const string HIGH_SCORE_TABLE = "highScoreTable"; 
+
     private enum State {
         WaitingForPlayerToStart,
         CountdownToStart,
@@ -24,6 +26,7 @@ public class KitchenGameManager : MonoBehaviour {
     private float gamePlayingTimer;
     private float gamePlayingTimerMax = 60f;
     private bool isPaused = false;
+    private bool hasSavedHighScores = false;
 
     private void Awake(){
         Instance = this;
@@ -59,8 +62,52 @@ public class KitchenGameManager : MonoBehaviour {
                 }
                 break;
             case State.GameOver:
+                if (!hasSavedHighScores) { 
+                    // Create HighScoreEntry
+                    HighScoreEntry highscoreEntry = new HighScoreEntry{ score = DeliveryManager.Instance.GetRecipesDelivered() };
+
+                    // Load saved HighScores
+                    HighScores highscores = loadHighScores();
+
+                    // Add new entry to HighScores
+                    highscores.highscoreEntryList.Add(highscoreEntry);
+
+                    // Save updated HighScores
+                    saveHighScores(highscores);
+                    
+                    hasSavedHighScores = true;
+                    Debug.Log("Game Over" + PlayerPrefs.GetString(HIGH_SCORE_TABLE));
+                }
                 break;
         }
+    }
+
+    private HighScores loadHighScores(){
+        string jsonString = PlayerPrefs.GetString(HIGH_SCORE_TABLE);
+        HighScores highscores = JsonUtility.FromJson<HighScores>(jsonString);
+
+        if (highscores == null || highscores.highscoreEntryList == null) {
+            highscores = new HighScores();
+            highscores.highscoreEntryList = new List<HighScoreEntry>();
+        }
+
+        return highscores;
+    }
+
+    private void saveHighScores(HighScores highscores){
+        string json = JsonUtility.ToJson(highscores, true); // PrettyPrint set to true
+        PlayerPrefs.SetString(HIGH_SCORE_TABLE, json);
+        PlayerPrefs.Save();
+    }
+
+    [System.Serializable]
+    private class HighScores{
+        public List<HighScoreEntry> highscoreEntryList;
+    }
+
+    [System.Serializable]
+    private class HighScoreEntry{
+        public int score;
     }
 
     private void GameInput_OnPauseAction(object sender, EventArgs e) {

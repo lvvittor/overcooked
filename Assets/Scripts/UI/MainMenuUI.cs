@@ -8,6 +8,7 @@ public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button highScoreButton;
 
     private void Awake(){
         playButton.onClick.AddListener(() => {
@@ -16,6 +17,10 @@ public class MainMenuUI : MonoBehaviour
 
         quitButton.onClick.AddListener(() => {
             Application.Quit();
+        });
+
+        highScoreButton.onClick.AddListener(() => {
+            HighScoreTableUI.Instance.Show();
         });
 
         Time.timeScale = 1f;
