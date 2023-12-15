@@ -17,7 +17,6 @@ public class NewBehaviourScript : MonoBehaviour
     private void KitchenGameManager_OnStageChanged(object sender, System.EventArgs e) {
         if(KitchenGameManager.Instance.IsGameOver()){
             Show();
-
             recipiesDeliveredText.SetText(DeliveryManager.Instance.GetRecipesDelivered().ToString());
         } else {
             Hide();
