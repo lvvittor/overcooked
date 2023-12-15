@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class OptionsUI : MonoBehaviour {
 
+    public static event EventHandler OnRebind;
     public static OptionsUI Instance { get; private set; }
 
     [SerializeField] private Button soundEffectsButton;
@@ -123,6 +125,7 @@ public class OptionsUI : MonoBehaviour {
         GameInput.Instance.RebindBinding(binding, () => {
             HidePressToRebindKey();
             UpdateVisual();
+            OnRebind?.Invoke(this, EventArgs.Empty);
         });
     }
 }
