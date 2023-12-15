@@ -13,12 +13,16 @@ public class HighScoreTableUI : MonoBehaviour
 
     [SerializeField] private Button mainMenuButton;
 
-    private static string HIGH_SCORE_TABLE = "highScoreTable"; 
+    private const string HIGH_SCORE_TABLE = "highScoreTable"; 
 
-     private void Start() {
+    private void Start() {
         Hide();
     }
-    
+
+    public static HighScoreTableUI GetInstance() {
+        return Instance;
+    }
+
     private void Awake(){
         Instance = this;
         mainMenuButton.onClick.AddListener(() => {
