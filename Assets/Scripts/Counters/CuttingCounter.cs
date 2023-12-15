@@ -6,6 +6,7 @@ using UnityEngine;
 public class CuttingCounter : BaseCounter, IHasProgress {
 
     public static event EventHandler OnAnyCut;
+    public static event EventHandler OnFinishCut;
 
     new public static void ResetStaticData() {
         OnAnyCut = null;
@@ -53,7 +54,7 @@ public class CuttingCounter : BaseCounter, IHasProgress {
         }
     }
 
-    private bool HasRecipeWithInput(KitchenObjectSO input) {
+    public bool HasRecipeWithInput(KitchenObjectSO input) {
         if (recipeLookup.ContainsKey(input)) {
             return true;
         }
@@ -79,6 +80,7 @@ public class CuttingCounter : BaseCounter, IHasProgress {
 
                 GetKitchenObject().DestroySelf();
                 KitchenObject.SpawnKitchenObject(output, this);
+                OnFinishCut?.Invoke(this, EventArgs.Empty);
             }
         }
     }
